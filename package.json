@@ -1,0 +1,26 @@
+{
+  "name": "express-playground",
+  "version": "0.0.1",
+  "description": "Building an express API from scratch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/AidanLDev/express-playground.git"
+  },
+  "keywords": [
+    "express",
+    "learning"
+  ],
+  "author": "Aidan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AidanLDev/express-playground/issues"
+  },
+  "homepage": "https://github.com/AidanLDev/express-playground#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
