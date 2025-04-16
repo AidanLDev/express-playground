@@ -1,13 +1,20 @@
 import express from "express";
+import rootRouter from "./routes/root.js"
+import userRouter from "./routes/user.js"
 
 const app = express();
 const port = "3000";
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
+// Middleware
+app.use(express.json())
+// Server static files from the public dir
+app.use(express.static('public'))
+
+// Routes
+app.use("/", rootRouter)
+app.use("/user", userRouter)
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server open on http://localhost:${port}`);
 })
 
