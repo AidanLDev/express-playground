@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/AidanLDev/express-playground#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "pg": "^8.14.1"
   }
 }
