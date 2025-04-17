@@ -1,13 +1,15 @@
 import pg from "pg";
+import dotenv from "dotenv";
+
+dotenv.config();
 const { Pool } = pg;
 
-// TODO: Store secrets securely
-const pool = Pool({
-  user: "xxx",
-  host: "localhost",
-  database: "express_playground",
-  password: "xxx",
-  port: 5432,
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
+  port: process.env.DB_PORT,
 });
 
 // Test the connection
