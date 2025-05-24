@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate:latest": "npx knex --knexfile knexfile.cjs migrate:latest",
-    "migrate:rollback": "npx knex --knexfile knexfile.cjs migrate:rollback"
+    "migrate:rollback": "npx knex --knexfile knexfile.cjs migrate:rollback",
+    "create:table": "npx knex --knexfile knexfile.cjs migrate:make create_table_name"
   },
   "type": "module",
   "repository": {
