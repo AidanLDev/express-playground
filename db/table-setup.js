@@ -1,10 +1,8 @@
 import pool from "./db.js";
 
 const createUsersTable = async () => {
-  await pool.query(`DROP TABLE IF EXISTS users`);
-
   await pool.query(`
-      CREATE TABLE users (
+      CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
         first_name VARCHAR(100) NOT NULL,
         last_name VARCHAR(100) NOT NULL,
@@ -12,7 +10,7 @@ const createUsersTable = async () => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
-  console.log("Users table created successfully");
+  console.log("Users table ensured");
 };
 
 export async function ensureDatabase() {
