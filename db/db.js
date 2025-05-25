@@ -1,24 +1,21 @@
-import pg from "pg";
+import knex from "knex";
 import dotenv from "dotenv";
 
 dotenv.config();
-const { Pool } = pg;
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASS,
-  port: process.env.DB_PORT,
+const knexInstance = knex({
+  client: "pg",
+  connect: {
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    host: process.env.DB_HOST || "localhost",
+    port: process.env.DB_PORT || 5432,
+  },
+  migrations: {
+    tableName: "knex_migrations",
+    directory: "../migrations",
+  },
 });
 
-// Test the connection
-pool.query("SELECT NOW()", (err, res) => {
-  if (err) {
-    console.error("Database connection error:", err);
-  } else {
-    console.log("Database connected successfully:", res.rows[0]);
-  }
-});
-
-export default pool;
+export default knexInstance;

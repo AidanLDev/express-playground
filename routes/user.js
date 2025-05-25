@@ -1,5 +1,6 @@
 import express from "express";
 import pool from "../db/db.js";
+import { insertUser } from "../db/queries/user.js";
 
 const router = express.Router();
 
@@ -55,18 +56,13 @@ router.put("/", async (req, res) => {
       .send("You must give us your age and name!! OR ELSE :(");
   }
 
-  const query = `INSERT INTO users(first_name, last_name, age, created_at)
-    VALUES ($1, $2, $3, NOW())
-    RETURNING *;
-  `;
-
   try {
-    const result = await pool.query(query, [first_name, last_name, age]);
-    if (result.rows.length === 0) {
+    const user = await insertUser({ first_name, last_name, age });
+    if (!user) {
       return res.status(400).send("Error creating user");
     }
-    console.log("Just added a user! : ", result.rows[0]);
-    return res.json(result.rows);
+    console.log("Just added a user! : ", user);
+    return res.json(user);
   } catch (err) {
     console.log(err);
     return res.status(500).send("Error creating user");
