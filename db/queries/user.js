@@ -6,8 +6,12 @@ export const insertUser = async ({ first_name, last_name, age }) => {
       first_name,
       last_name,
       age,
-      create_at: knex.fn.now(),
+      created_at: knex.fn.now(),
     })
     .returning("*");
   return user;
+};
+
+export const selectUsers = async () => {
+  return [await knex("users").select("*")];
 };

@@ -1,17 +1,13 @@
 import express from "express";
-import pool from "../db/db.js";
-import { insertUser } from "../db/queries/user.js";
+import { insertUser, selectUsers } from "../db/queries/user.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  const query = req.query;
-  console.log("You passed in a query did ya?...: ", query);
-
+router.get("/", async (req, res) => {
   console.log("Will try get users from the db");
   try {
-    const result = pool.query("SELECT * FROM users;");
-    return res.json(result.rows);
+    const users = await selectUsers();
+    return res.status(200).send(users);
   } catch (err) {
     console.log(err);
     return res.status(500).send("Error fetching users");
